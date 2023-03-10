@@ -2,7 +2,7 @@
 
 #include"InertialNavigation.h"
 #include"Constant.h"
-#include<iomanip>//ÉèÖÃÊä³ö¸ñÊ½
+#include<iomanip>//è®¾ç½®è¾“å‡ºæ ¼å¼
 #include<fstream>
 using namespace std;
 struct NavState
@@ -64,39 +64,39 @@ public:
 
 private:
 
-	IMUDATA IMUData_pre, IMUData_cur;//Ç°Ò»Ê±¿ÌºÍÏÖÔÚµÄIMUÊı¾İ
-	GNSSDATA GNSSData;//GNSSÊı¾İ
+	IMUDATA IMUData_pre, IMUData_cur;//å‰ä¸€æ—¶åˆ»å’Œç°åœ¨çš„IMUæ•°æ®
+	GNSSDATA GNSSData;//GNSSæ•°æ®
 
-	double timestamp;//Ã¿´ÎÒª½øĞĞÄÚ²åµÄÊ±¼ä¼ÇºÅ£¨Í¨³£Îª³õÊ¼Ê±¿ÌºÍÓĞGNSSÊı¾İÕûÃë£©
+	double timestamp;//æ¯æ¬¡è¦è¿›è¡Œå†…æ’çš„æ—¶é—´è®°å·ï¼ˆé€šå¸¸ä¸ºåˆå§‹æ—¶åˆ»å’Œæœ‰GNSSæ•°æ®æ•´ç§’ï¼‰
 
 	IMUError ImuError;
 	IMUNoise ImuNoise;
 
-	Vector antlever;//¸Ë±Û£¨ÓÉb->GNSS,ÔÚbÏµÏÂ²âÁ¿£©
-	Vector odolever;//Àï³Ì¼Æ¸Ë±Û
+	Vector antlever;//æ†è‡‚ï¼ˆç”±b->GNSS,åœ¨bç³»ä¸‹æµ‹é‡ï¼‰
+	Vector odolever;//é‡Œç¨‹è®¡æ†è‡‚
 
-	Matrix Cov;//×´Ì¬Ğ­·½²î£¨21*21£©
-	Matrix q;//ÏµÍ³ÔëÉù¾ØÕó£¨18*18£©
-	Matrix x;//´ı¹ÀµÄ²ÎÊı£¨21*1£©
+	Matrix Cov;//çŠ¶æ€åæ–¹å·®ï¼ˆ21*21ï¼‰
+	Matrix q;//ç³»ç»Ÿå™ªå£°çŸ©é˜µï¼ˆ18*18ï¼‰
+	Matrix x;//å¾…ä¼°çš„å‚æ•°ï¼ˆ21*1ï¼‰
 
 	double odoVel;
 
 
-	void ImuInterpolate(IMUDATA& IMUData_pre, IMUDATA& IMUData_cur, double midtime, IMUDATA& IMUData_mid);//IMUÄÚ²å
+	void ImuInterpolate(IMUDATA& IMUData_pre, IMUDATA& IMUData_cur, double midtime, IMUDATA& IMUData_mid);//IMUå†…æ’
 	
-	void ImuPropagation(IMUDATA& IMUData_pre, IMUDATA& IMUData_cur);//IMU×´Ì¬´«²¥
-	void GNSSUpdating(IMUDATA& IMUData_mid);//GNSS²âÁ¿¸üĞÂ
+	void ImuPropagation(IMUDATA& IMUData_pre, IMUDATA& IMUData_cur);//IMUçŠ¶æ€ä¼ æ’­
+	void GNSSUpdating(IMUDATA& IMUData_mid);//GNSSæµ‹é‡æ›´æ–°
 
-	void Feedback();//×´Ì¬·´À¡
-	void Compensate();//IMUÊı¾İÎó²î²¹³¥
+	void Feedback();//çŠ¶æ€åé¦ˆ
+	void Compensate();//IMUæ•°æ®è¯¯å·®è¡¥å¿
 
 	bool IsVelocityZero();
-	void ZUPT();//ÁãËÙ²âÁ¿¸üĞÂ
+	void ZUPT();//é›¶é€Ÿæµ‹é‡æ›´æ–°
 
 	//bool IsNHC();
-	void NHC();//²àÏò´¹ÏòËÙ¶ÈÎª0ÔË¶¯Ô¼Êø²âÁ¿¸üĞÂ
+	void NHC();//ä¾§å‘å‚å‘é€Ÿåº¦ä¸º0è¿åŠ¨çº¦æŸæµ‹é‡æ›´æ–°
 
-	void ODO();//ÓÉÀï³Ì¼ÆÌá¹©µÄÇ°ÏòËÙ¶ÈµÄ²âÁ¿¸üĞÂ
+	void ODO();//ç”±é‡Œç¨‹è®¡æä¾›çš„å‰å‘é€Ÿåº¦çš„æµ‹é‡æ›´æ–°
 
 	//void NHC_ODO();
 
@@ -105,20 +105,3 @@ private:
 };
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-void CreateMatrix_F_G_H(IMUBOX& body, Vector AngInc_k, Vector VelInc_k, Vector lb, Matrix& F, Matrix& G, Matrix& H, double T);
-Matrix CreateMatrixq(IMUError IMUError);
